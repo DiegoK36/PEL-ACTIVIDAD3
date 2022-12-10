@@ -30,7 +30,7 @@ public:
     }
 };
 
-template<typename T> class VectorPEL { //plantilla de vectro creado en clase
+template<typename T> class VectorPEL { //plantilla de vector creado en clase
     private:
     T * v_, * space_, * last_;
 
