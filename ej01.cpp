@@ -55,7 +55,7 @@ public:
 
     T mostrar_dato(int n) {return v_[n];}
 
-    auto begin(int n) const -> T* {return n + v_;} //funcion que espera un parametro y devuele un puntero a dicha posicion en el vector
+    auto begin(int n) const -> T* {return n + v_;} //funcion que espera un parametro y devuelve un puntero a dicha posicion en el vector
     auto end() const -> T* {return space_;}
 
     auto push_back(T const& valor) {
