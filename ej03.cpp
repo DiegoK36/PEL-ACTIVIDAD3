@@ -7,21 +7,42 @@ using namespace std;
 
 int exit_=0;
 class entrada {
-    public:
+    public:   
     string fecha;
-    string cliente;
     string tipo;
+    string nombre, apellidos, DNI, fechaNacimiento;
+    void cliente();
     entrada(){
         fecha="";
         tipo="";
-        cliente="";
-    }entrada(string x,string y, string z){
-        fecha=x;
-        tipo=y;
-        cliente=z;
+        nombre="";
+        apellidos="";
+        DNI="";
+        fechaNacimiento="";
+
+        
+    }entrada(string a,string b,string c,string d,string e,string f){
+        fecha=a;
+        tipo=b;
+        nombre=c;
+        apellidos=d;
+        DNI=e;
+        fechaNacimiento=f;
      }
 
 };
+
+void entrada::cliente(){
+    cout<<"Nombre: "<<endl;
+    cin>>nombre;
+    cout<<"Apellidos: "<<endl;
+    cin>>apellidos;
+    cout<<"DNI: "<<endl;
+    cin>>DNI;
+    cout<<"Fecha de nacimiento: "<<endl;
+    cin>>fechaNacimiento;
+
+}
 
 template<typename T> class VectorNormal{  //plantilla de vectro creado en clase
 private:
@@ -75,7 +96,19 @@ public:
             *space_ = valor;
             ++space_;
         }
-    }};
+    }
+    
+    void pedirDatosNormal(){
+        entrada();
+        string nomb;
+        entrada a;
+        a.fecha="11/12 a las 21:00";
+        cout<<"Bienvenido a la entrada Normal\n";
+        a.cliente();
+        a.tipo="Normal";
+        push_back(a);
+    };
+   };
 template<typename T> class VectorVIP{  //plantilla de vectro creado en clase
 private:
     T * v_1, * space_, * last_;
@@ -130,15 +163,18 @@ public:
         
         }
         }
-
-    
-   
+        
+   void pedirDatosVip(){
+        entrada();
+        string nomb;
+        entrada a;
+        a.fecha="11/12 a las 21:00";
+        cout<<"Bienvenido a la entrada VIP\n";
+        a.cliente();
+        a.tipo="VIP";
+        push_back(a);
     };
-
-
-                    
-
-
+};
 
 int main() {
 
@@ -146,19 +182,14 @@ int main() {
     VectorVIP<entrada>* v1 = new VectorVIP<entrada>; //free store
     string tip, nomb;
     entrada a, b, c, d, e;
-    a.fecha="11/12 a las 21:00";
-    cout<<"******** Bienvenido al concierto de Dani Martin, el "<<a.fecha<< " ********"<<endl;
-    cout<<"         Dime tu nombre:";
-    cin>>nomb;
-    cout<<"         ¿Que tipo de entrada quieres, [VIP] o [Normal]?";
-    cin>>tip;
-    a.cliente=nomb;
-    a.tipo=tip;
-    if(tip=="VIP"){
-    v1->push_back(a);
-    }else if(tip=="Normal"){
-     v->push_back(a);
-    }
    
-     //mandamos al vector los 5 objetos creados
+    cout<<"******** Bienvenido al concierto de Dani Martin, el 11/12 a las 21:00 ********"<<endl;
+    cout<<"         Elige tu entrada: [VIP] o [Normal]  "<<endl;
+    cin>>tip;
+        if(tip=="VIP"){
+            v1->pedirDatosVip();         
+        }
+        else if(tip=="Normal"){
+        v->pedirDatosNormal();  
+          } 
 }
