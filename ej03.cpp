@@ -164,9 +164,8 @@ public:
         }
         }
         
-   void pedirDatosVip(){
+   void pedirDatosVip(){   
         entrada();
-        string nomb;
         entrada a;
         a.fecha="11/12 a las 21:00";
         cout<<"Bienvenido a la entrada VIP\n";
