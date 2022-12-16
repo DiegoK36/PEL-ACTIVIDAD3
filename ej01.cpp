@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include <string> //manejo de strings
-#include <cctype> //
+#include <cctype>
 #include <algorithm> //manejo de espacios
 #include <functional>
 
@@ -26,6 +26,8 @@ public:
         grupo=y;
         genero=z;
     }
+
+    static void informacion(); //funcion metodo
 
 };
 
@@ -83,7 +85,7 @@ public:
         }
     }
 
-    int dato(int posicion, string dato, int tam) { //funcion que muestra la busqueda donde se espera; Posicion en el vector, el dato introducido por el usuario, y el tamaño del vector
+    int dato(int posicion, string dato, int tam) { //funcion que muestra la busqueda, donde se espera; Posicion en el vector, el dato introducido por el usuario, y el tamaño del vector
 
         int found;
         string alb[3]; //cramos un array para almacenar el objeto desmenuzado en sus atributos
@@ -103,41 +105,31 @@ public:
                 i = 3; //al tener toda la informacion se finaliza el bucle de manrea inmediata
                 found = 2; //se "activa" el localizador
             }
-            else if (((i+1)==3)&&(posicion==(tam-1))){ //en caso de estar en la ultima iteracion del bucle de la funcion mas el bucle de donde se llama a la funcion...
-                    if (found != 2) { //en caso de no haber un localizador significara que el dato introducido por el usuario es eroneo y se le notifica
-                        cout << "No hay nada relacionado con dicha palabra\nQuiere introducir otra?\n [1] SI\n [0] NO\n"; //se le pregunta si desea realizar otra busqueda
+            else if (((i+1)==3)&&(posicion==(tam-1))){ //en caso de estar en la ultima iteracion del bucle de la funcion, mas el bucle de donde se llama a la funcion...
+                if (found != 2) { //en caso de no haber un localizador significara que el dato introducido por el usuario es eroneo y se le notifica
+                    cout << "No hay nada relacionado con dicha palabra\nQuiere introducir otra?\n [1] SI\n [0] NO\n"; //se le pregunta si desea realizar otra busqueda
+                    cin >> exit_;
+                    while (cin.fail()) //Bucle para manejo de errores en input
+                    {
+                        cin.clear();
+                        cin.ignore();
+                        cout << "Error, introduzca dato de tipo entero: ";
                         cin >> exit_;
-                        while (cin.fail()) //Bucle para manejo de errores en input
-                        {
-                            cin.clear();
-                            cin.ignore();
-                            cout << "Error, introduzca dato de tipo entero: ";
-                            cin >> exit_;
-                        }
-
                     }
+
+                }
             }
         }
         return exit_; //se devuelve la decision del usuario
     };
 };
 
-int main() {
+VectorPEL<album>* v = new VectorPEL<album>; //free store
 
-    VectorPEL<album>* v = new VectorPEL<album>; //free store
+void album::informacion(){
 
     string dato;
     int onetime=0;
-
-    album a, b, c, d, e;
-
-    a.titulo="HOTSPACE", a.genero="ROCK", a.grupo="QUEEN"; //declaramos los atributos con sus datos para crear el objeto
-    b.titulo="STARSHOPPING", b.genero="ALTERNATIVE", b.grupo="LILPEEP"; //declaramos los atributos con sus datos para crear el objeto
-    c.titulo="SUNFLOWER", c.genero="HIPHOP", c.grupo="POSTMALONE"; //declaramos los atributos con sus datos para crear el objeto
-    d.titulo="VICEVERSA", d.genero="REGGAETON", d.grupo="RAUWALEJANDRO"; //declaramos los atributos con sus datos para crear el objeto
-    e.titulo="ONSTAGE", e.genero="ROCK", e.grupo="ELVIS"; //declaramos los atributos con sus datos para crear el objeto
-
-    v->push_back(a), v->push_back(b), v->push_back(c), v->push_back(d), v->push_back(e); //mandamos al vector los 5 objetos creados
 
     do {
 
@@ -146,7 +138,7 @@ int main() {
         }
         onetime=1;
 
-        cout << "¿Que palabra desea buscar?:" << endl;
+        cout << "Que palabra desea buscar?:" << endl;
         getline(cin, dato); //Recogida del string con espacios
 
         dato.erase(std::remove_if(dato.begin(), dato.end(), ::isspace), dato.end()); //QUita los espacios del string
@@ -163,8 +155,23 @@ int main() {
 
         for(int i=0; i<v->size(); i++){ //Realizamos un bucle tantas veces como objetos haya en el vector
 
-            v->dato(i, dato, tam); //lamada a la funcion pasandole los parametros de posicion en el vector, el dato introducido por el usuario, y el tamaño del vector
+            v->dato(i, dato, tam); //lamada a la funcion pasandole los parametros de posicion en el vector, el dato introducido por el usuario y el tamaño del vector
         }
     }
     while (exit_==1); //mientras siga a 1 la variable exit no termina de preguntar al usuario.
+}
+
+int main() {
+
+    album a, b, c, d, e;
+
+    a.titulo="HOTSPACE", a.genero="ROCK", a.grupo="QUEEN"; //declaramos los atributos con sus datos para crear el objeto
+    b.titulo="STARSHOPPING", b.genero="ALTERNATIVE", b.grupo="LILPEEP"; //declaramos los atributos con sus datos para crear el objeto
+    c.titulo="SUNFLOWER", c.genero="HIPHOP", c.grupo="POSTMALONE"; //declaramos los atributos con sus datos para crear el objeto
+    d.titulo="VICEVERSA", d.genero="REGGAETON", d.grupo="RAUWALEJANDRO"; //declaramos los atributos con sus datos para crear el objeto
+    e.titulo="ONSTAGE", e.genero="ROCK", e.grupo="ELVIS"; //declaramos los atributos con sus datos para crear el objeto
+
+    v->push_back(a), v->push_back(b), v->push_back(c), v->push_back(d), v->push_back(e); //mandamos al vector los 5 objetos creados
+
+    album::informacion();
 }

@@ -28,6 +28,8 @@ public:
         tipo=z;
         alquilado=p;
     }
+    static void alquilar(); //funcion metodo
+    static void devolver(); //funcion metodo
 };
 
 template<typename T> class VectorPEL { //plantilla de vectro creado en clase
@@ -135,7 +137,7 @@ template<typename T> class VectorPEL { //plantilla de vectro creado en clase
 
 VectorPEL<videoclub>* v = new VectorPEL<videoclub>; //free store
 
-void alquilar(){ //funcion donde se alquilan los discos
+void videoclub::alquilar(){ //funcion donde se alquilan los discos
     string discoA;
     int accion=1;
 
@@ -162,7 +164,7 @@ void alquilar(){ //funcion donde se alquilan los discos
     }
 }
 
-void devolver(){ //funcion donde se devuelven los discos
+void videoclub::devolver(){ //funcion donde se devuelven los discos
     string discoD;
     int accion=2;
 
@@ -207,7 +209,7 @@ int main() {
         cout << "[1] Alquilar un disco\n";
         cout << "[2] Devolver un disco\n";
         cout << "[3] Salir\n";
-        cout << "¿Que accion desea realizar?\n";
+        cout << "Que accion desea realizar?\n";
         cout << "\n";
 
         cin >> elec;
@@ -222,10 +224,10 @@ int main() {
 
         switch (elec) {
             case 1:
-                alquilar();
+                videoclub::alquilar();
                 break;
             case 2:
-                devolver();
+                videoclub::devolver();
                 break;
             case 3:
                 cout << "Gracias por visitar nuestro videoclub.\n";

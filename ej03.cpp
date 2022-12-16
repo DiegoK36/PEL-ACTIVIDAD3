@@ -28,6 +28,10 @@ class entrada {
         tipo=c;
         calificacion=d;
     }
+
+    static void grabar_notas(); //funcion metodo
+    static void ver_notas_grabadas(); //funcion metodo
+
 };
 
 template<typename T> class VectorM11{  //plantilla de vectro creado en clase
@@ -88,10 +92,15 @@ public:
 
         entrada aux; //creamos una variable auxiliar de tipo videoclub
 
-        for(int i=0; i<size(); i++){ //bucle que se repite tantas veces como objetos haya en el vector
+        if(size()!=NULL){
+            for(int i=0; i<size(); i++){ //bucle que se repite tantas veces como objetos haya en el vector
 
-            aux = *begin(i); //le asignamos a la variable el puntero que apunta a begin pasandole la posicion que queremos ver
-            cout << "Nombre: " << aux.nombre << " | N. expediente: " << aux.expediente << " | Grupo: " << aux.tipo << " | Calificacion: " << aux.calificacion << endl; //se muestra por pantalla la informacion
+                aux = *begin(i); //le asignamos a la variable el puntero que apunta a begin pasandole la posicion que queremos ver
+                cout << "\tNombre: " << aux.nombre << " | N. expediente: " << aux.expediente << " | Grupo: " << aux.tipo << " | Calificacion: " << aux.calificacion << endl; //se muestra por pantalla la informacion
+            }
+        }
+        else{
+            cout << "\tTodavia no hay notas publicadas.\n";
         }
 
     }
@@ -157,10 +166,15 @@ public:
 
         entrada aux; //creamos una variable auxiliar de tipo videoclub
 
-        for(int i=0; i<size(); i++){ //bucle que se repite tantas veces como objetos haya en el vector
+        if(size()!=NULL){
+            for(int i=0; i<size(); i++){ //bucle que se repite tantas veces como objetos haya en el vector
 
-            aux = *begin(i); //le asignamos a la variable el puntero que apunta a begin pasandole la posicion que queremos ver
-            cout << "Nombre: " << aux.nombre << " | N. expediente: " << aux.expediente << " | Grupo: " << aux.tipo << " | Calificacion: " << aux.calificacion << endl; //se muestra por pantalla la informacion
+                aux = *begin(i); //le asignamos a la variable el puntero que apunta a begin pasandole la posicion que queremos ver
+                cout << "\tNombre: " << aux.nombre << " | N. expediente: " << aux.expediente << " | Grupo: " << aux.tipo << " | Calificacion: " << aux.calificacion << endl; //se muestra por pantalla la informacion
+            }
+        }
+        else{
+            cout << "\tTodavia no hay notas publicadas.\n";
         }
     }
 };
@@ -168,7 +182,7 @@ public:
 VectorM11<entrada>* v_m11 = new VectorM11<entrada>; //free store grupo M11
 VectorM12<entrada>* v_m12 = new VectorM12<entrada>; //free store grupo M12
 
-void grabar_notas(){
+void entrada::grabar_notas(){
 
     string nombre, expediente, tipo, calificacion;
     int exit=0;
@@ -205,12 +219,12 @@ void grabar_notas(){
             exit=1; //salimos del bucle
         }
         else{
-            cout << "Introduzca bien el grupo\n";
+            cout << "Grupo inexistente\n";
         }
     }
 }
 
-void ver_notas_grabadas(){
+void entrada::ver_notas_grabadas(){
 
     string tipo;
     int exit=0;
@@ -229,7 +243,7 @@ void ver_notas_grabadas(){
             exit=1;
         }
         else{
-            cout << "Introduzca bien el grupo\n";
+            cout << "Grupo inexistente\n";
         }
     }
 }
@@ -239,9 +253,10 @@ int main() {
     int elec=0;
     string contra;
 
+    cout << "Bienvenido al sistema de notas\n";
+
     while (elec!=3) {
         cout << "\n";
-        cout << "Bienvenido al sistema de notas\n";
         cout << "[1] Grabar una nota en el tablon (PROFESOR)\n";
         cout << "[2] Ver notas en el tablon (ALUMNO)\n";
         cout << "[3] Salir\n";
@@ -263,14 +278,14 @@ int main() {
                 cout << "Introduzca la contrasena\n";
                 cin >> contra;
                 if (contra=="admin"){
-                    grabar_notas();
+                    entrada::grabar_notas();
                 }
                 else{
-                    cout << "Contraseña incorrecta";
+                    cout << "Contrasena incorrecta";
                 }
                 break;
             case 2:
-                ver_notas_grabadas();
+                entrada::ver_notas_grabadas();
                 break;
             case 3:
                 cout << "Gracias por visitar nuestro sistema.\n";
